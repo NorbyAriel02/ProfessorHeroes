@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 069b56ce38c68b24db2e5d1804dbbce2, type: 3}
+  m_Name: GameConfig
+  m_EditorClassIdentifier: 
+  sceneName:
+  - Menu
+  - Stage
+  - HighScore
+  panelOptions: {fileID: 3516942486551879675, guid: 53fd73a4dcde4144a8b1c9eaacb0aed4, type: 3}
+  spreadSheetID: 19GALJvbgOQ5GDgZLvNrWZmvgviqTtcslViDEZAewVw4
+  sheetID: Facil
+  serviceAccountEmail: googlesheetsunity@unityapi-test.iam.gserviceaccount.com
+  certificateName: unityapi-test-7311ad37cd10.p12
+  readRange: A2:C11
+  clips:
+  - {fileID: 8300000, guid: 67e4101f5bee16047b0782387109a748, type: 3}
+  - {fileID: 8300000, guid: 9409fb82428e09d49888ce5307d218ea, type: 3}
+  fileSettingsData: settings.config
+  CheckMarkSound:
+  - {fileID: 21300000, guid: 882a3a9e215adb24ab408e5fce5c3996, type: 3}
+  - {fileID: 21300000, guid: ad39ce843723b3f42b5e11915ea4485a, type: 3}
+  - {fileID: 21300000, guid: 88a2bde63aaa36e4e8dfe5f9b2388a79, type: 3}
+  DefaultDataSetting:
+    MusicVolValue: 7
+    MusicMixerParameter: Music8bits
+    musicClipIndex: 0
+    SFXVolValue: 7
+    SFXMixerParameter: SFX
+    ShadowValue: 0
+    QualityTexture: 6
+    IndexResolution: 0
+  AudioMixer: {fileID: 24100000, guid: fc470ee9da391e64087e1758c4022615, type: 2}
