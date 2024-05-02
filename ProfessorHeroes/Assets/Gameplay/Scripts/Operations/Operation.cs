@@ -7,7 +7,9 @@ using UnityEngine.UIElements;
 public class Operation : MonoBehaviour
 {
     public KeyCode keyMark;
-    public GameObject mark;    
+    public GameObject mark;
+    public AudioClip OnOperacionClip;
+    public AudioClip OffOperacionClip;
     int value1 = 0;
     int value2 = 0;
     private TMP_Text txtOperation;
@@ -46,6 +48,7 @@ public class Operation : MonoBehaviour
         {
             oc.op = false;
             mark.SetActive(false);
+            AudioManager.Instance.PlayOnShot(OffOperacionClip);
         }
         else
         {
@@ -56,6 +59,7 @@ public class Operation : MonoBehaviour
             oc.op = true;
             oc.operation = this;
             mark.SetActive(true);
+            AudioManager.Instance.PlayOnShot(OnOperacionClip);
         }
     }
     public void SetMark()

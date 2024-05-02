@@ -3,18 +3,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class OperationController : MonoBehaviour
 {
     public string level;
     public bool op = false;
     public bool re = false;
+    public int Correctas = 0;
+    public int Incorrectas = 0;
     public OperationSpawner operationSpawner;
     public Result result;
     public Operation operation;
     public UIController UI;
-    public GameConfig gameConfig;
+    public GameConfig gameConfig;    
+    public AudioClip sfxOperacionIncorrecta;
+    public AudioClip sfxOperacionCorrecta;    
     private GoogleSheetsAPIForUnity Sheet;
 
     private void OnEnable()
@@ -40,14 +44,16 @@ public class OperationController : MonoBehaviour
     }
     void Correcto()
     {
+        AudioManager.Instance.PlayOnShot(sfxOperacionCorrecta);
         result.SetMark();
         operation.SetMark();
         op = false;
         re = false;
         result.gameObject.SetActive(false);
         operation.gameObject.SetActive(false);
-        
-        if(IsWin())
+        Correctas++;
+        UI.txtCorrectas.text = Correctas.ToString();
+        if (IsWin())
         {            
             UI.ShowWin();
             UpdateScoreTable();
@@ -55,6 +61,9 @@ public class OperationController : MonoBehaviour
     }    
     void Incorrecto()
     {
+        AudioManager.Instance.PlayOnShot(sfxOperacionIncorrecta);
+        Incorrectas++;
+        UI.txtIncorrectas.text = Incorrectas.ToString();
         result.SetMark();
         operation.SetMark();
         op = false;

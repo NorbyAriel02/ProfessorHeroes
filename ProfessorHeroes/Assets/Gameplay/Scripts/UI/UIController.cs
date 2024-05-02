@@ -6,12 +6,15 @@ using UnityEngine.SceneManagement;
 public class UIController : TTMenuController
 {
     public GameObject panelError;
-    public GameObject panelWin;
+    public GameObject winPanel;
     public float delay = 1;
     public float timer;
+    public TMP_Text txtCorrectas;
+    public TMP_Text txtIncorrectas;
     public TMP_Text txtTimer;
-    public TMP_Text txtWinTimer;    
-    public KeyCode keyExit;
+    public TMP_Text txtWinTimer;
+    public TMP_Text txtWinErrors;
+    public KeyCode PauseKey;
     private void OnEnable()
     {
         timer = 0;
@@ -24,12 +27,18 @@ public class UIController : TTMenuController
     public void ShowWin()
     {
         txtWinTimer.text = txtTimer.text;
-        panelWin.SetActive(true);
+        txtWinErrors.text = txtIncorrectas.text;
+        winPanel.SetActive(true);
+        Time.timeScale = 0f;
+    }
+    public void ShowPause()
+    {
+        ChangeOfScene.Instance.OpenPausePanel();
         Time.timeScale = 0f;
     }
     public void HiddeWin()
     {
-        panelWin.SetActive(false);
+        winPanel.SetActive(false);
         Time.timeScale = 1f;
     }
     private IEnumerator DelayErrorMensaje()
@@ -43,21 +52,34 @@ public class UIController : TTMenuController
     }    
     private void Update()
     {
-        if(Input.GetKeyDown(keyExit))
+        if(Input.GetKeyDown(PauseKey))
         {
-            if(panelWin.activeSelf)
-            {
-                HiddeWin();
-            }
-            else
-            {
-                ShowWin();
-            }
+            ShowPause();
         }
     }
     private void FixedUpdate()
     {
         timer += Time.deltaTime;
         txtTimer.text = timer.ToString("0.000");
+    }
+    public override void Menu()
+    {
+        Time.timeScale = 1f;
+        base.Menu();
+    }
+    public override void Play()
+    {
+        Time.timeScale = 1f;
+        base.Play();
+    }
+    public override void Close()
+    {
+        Time.timeScale = 1f;
+        base.Close();
+    }
+    public override void HighScore()
+    {
+        Time.timeScale = 1f;
+        base.HighScore();
     }
 }

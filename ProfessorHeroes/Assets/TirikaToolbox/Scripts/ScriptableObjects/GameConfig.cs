@@ -5,9 +5,11 @@ using UnityEngine.Audio;
 [CreateAssetMenu(fileName = "New GameConfig", menuName = "NAW Config/GameConfig")]
 public class GameConfig : ScriptableObject
 {
-    [Header("Menu y Escenas")]
+    [Header("Escenas")]
     public List<string> sceneName = new List<string>();
-    public GameObject panelOptions;
+    [Header("UI Panel")]
+    public GameObject settingsPanel;
+    public GameObject pausePanel;
 
     [Header("Data from GoogleSheets")]
     public string spreadSheetID;

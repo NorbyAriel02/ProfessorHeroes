@@ -1,0 +1,132 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Table1_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: a71ee59f31eb70a45bc43e2c5e8650c3, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 1
+    m_Localized: Play
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2
+    m_Localized: Menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3
+    m_Localized: Exit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4
+    m_Localized: Settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5
+    m_Localized: High Score
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6
+    m_Localized: Music
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7
+    m_Localized: Enter Player Name...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8
+    m_Localized: Save
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9
+    m_Localized: SFX
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10
+    m_Localized: Shadows
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11
+    m_Localized: Textures
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12
+    m_Localized: Reload
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13
+    m_Localized: Best Time
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14
+    m_Localized: Your Times
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15
+    m_Localized: Current Time
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16
+    m_Localized: Back
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17
+    m_Localized: Score
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18
+    m_Localized: Congratulations, mathematical adventurer!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19
+    m_Localized: Like a true hero of knowledge, you have mastered each operation,
+      bravely facing the numbers and finding each solution with cunning and determination.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8602086121472
+    m_Localized: Full Screen/Resolution
+    m_Metadata:
+      m_Items: []
+  - m_Id: 599834827005952
+    m_Localized: Very Low
+    m_Metadata:
+      m_Items: []
+  - m_Id: 599913419874304
+    m_Localized: Low
+    m_Metadata:
+      m_Items: []
+  - m_Id: 599945934118912
+    m_Localized: Medium
+    m_Metadata:
+      m_Items: []
+  - m_Id: 599970240110592
+    m_Localized: High
+    m_Metadata:
+      m_Items: []
+  - m_Id: 599992595750912
+    m_Localized: Very High
+    m_Metadata:
+      m_Items: []
+  - m_Id: 600013768597504
+    m_Localized: Ultra
+    m_Metadata:
+      m_Items: []
+  - m_Id: 600034710757376
+    m_Localized: Language
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

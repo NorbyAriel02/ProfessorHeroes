@@ -7,6 +7,7 @@ public class FirstThreeRecords : MonoBehaviour
 {
     public List<TMP_Text> nameTexts;
     public List<TMP_Text> timeTexts;
+    public List<TMP_Text> errorTexts;
     public GameConfig gameConfig;
     private GoogleSheetsAPIForUnity Sheet;
     void Start()
@@ -22,6 +23,7 @@ public class FirstThreeRecords : MonoBehaviour
         {
             nameTexts[i].text = list.rows[i].cellData[1];
             timeTexts[i].text = list.rows[i].cellData[2];
+            //errorTexts[i].text = list.rows[i].cellData[3];
         }
     }
 }

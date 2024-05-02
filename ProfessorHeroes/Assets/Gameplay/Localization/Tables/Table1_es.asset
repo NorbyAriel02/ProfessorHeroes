@@ -1,0 +1,133 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Table1_es
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: es
+  m_SharedData: {fileID: 11400000, guid: a71ee59f31eb70a45bc43e2c5e8650c3, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 1
+    m_Localized: Jugar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2
+    m_Localized: Menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3
+    m_Localized: Salir
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4
+    m_Localized: Opciones
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5
+    m_Localized: "R\xE9cords"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6
+    m_Localized: Musica
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7
+    m_Localized: Escribe tu nombre...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8
+    m_Localized: Guardar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9
+    m_Localized: SFX
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10
+    m_Localized: Sombras
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11
+    m_Localized: Texturas
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12
+    m_Localized: Recargar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13
+    m_Localized: Mejor tiempo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14
+    m_Localized: Tus tiempos
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15
+    m_Localized: Tiempo actual
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16
+    m_Localized: Volver
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17
+    m_Localized: Puntuaciones
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18
+    m_Localized: "\xA1Felicidades, aventurero matem\xE1tico!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19
+    m_Localized: "Como un verdadero h\xE9roe del conocimiento, has dominado cada
+      operaci\xF3n, enfrent\xE1ndote valientemente a los n\xFAmeros y encontrando
+      cada soluci\xF3n con astucia y determinaci\xF3n."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8602086121472
+    m_Localized: "Pantalla Completa/Resoluci\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 599834827005952
+    m_Localized: Muy Bajo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 599913419874304
+    m_Localized: Bajo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 599945934118912
+    m_Localized: Medio
+    m_Metadata:
+      m_Items: []
+  - m_Id: 599970240110592
+    m_Localized: Alto
+    m_Metadata:
+      m_Items: []
+  - m_Id: 599992595750912
+    m_Localized: Muy Alto
+    m_Metadata:
+      m_Items: []
+  - m_Id: 600013768597504
+    m_Localized: Ultra
+    m_Metadata:
+      m_Items: []
+  - m_Id: 600034710757376
+    m_Localized: Idioma
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

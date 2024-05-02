@@ -8,6 +8,8 @@ public class Result : MonoBehaviour
 {
     public KeyCode keyMark;
     public GameObject mark;
+    public AudioClip OnResultadoClip;
+    public AudioClip OffResultadoClip;
     int result = 0;
     OperationController controller;
 
@@ -39,6 +41,7 @@ public class Result : MonoBehaviour
         {
             oc.re = false;
             mark.SetActive(false);
+            AudioManager.Instance.PlayOnShot(OffResultadoClip);
         }
         else
         {
@@ -49,6 +52,7 @@ public class Result : MonoBehaviour
             oc.re = true;
             oc.result = this;            
             mark.SetActive(true);
+            AudioManager.Instance.PlayOnShot(OnResultadoClip);
         }
     }
     public void SetMark()

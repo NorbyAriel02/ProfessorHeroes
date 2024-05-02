@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -27,13 +29,28 @@ public class GameManager : MonoBehaviour
     {
         LoadSettings();
     }
-
+    
     void LoadSettings()
     {
         settings = DataManager.Instance.GetSettings(gameConfig);
         SetAudio();
         SetQualityTexture();
         SetQualityShadows(settings.ShadowValue);
+        SetLocate();
+        SetResolution();
+    }
+    void SetResolution()
+    {
+        Resolution[] resolutions = Screen.resolutions;
+        Resolution resolution = resolutions[settings.IndexResolution];
+        Screen.SetResolution(resolution.width, resolution.height, settings.fullScreen);
+    }
+    void SetLocate()
+    {
+        if (_activeLocate)
+            return;
+
+        StartCoroutine(SetLocale(settings.idLocalization));
     }
     void SetQualityTexture()
     {
@@ -59,5 +76,13 @@ public class GameManager : MonoBehaviour
         AudioManager.Instance.SetSFXVolumen(settings.SFXVolValue);
         AudioManager.Instance.SetMusicVolumen(settings.MusicVolValue);
         AudioManager.Instance.PlayNextClip();
+    }
+    public bool _activeLocate = false;
+    public IEnumerator SetLocale(int id)
+    {
+        _activeLocate = true;
+        yield return LocalizationSettings.InitializationOperation;
+        LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[id];        
+        _activeLocate = false;
     }
 }

@@ -16,12 +16,13 @@ MonoBehaviour:
   - Menu
   - Stage
   - HighScore
-  panelOptions: {fileID: 3516942486551879675, guid: 53fd73a4dcde4144a8b1c9eaacb0aed4, type: 3}
+  settingsPanel: {fileID: 8723830888795873622, guid: 53fd73a4dcde4144a8b1c9eaacb0aed4, type: 3}
+  pausePanel: {fileID: 8018009644919945574, guid: a8531c723b75d2c4097b51236c740e40, type: 3}
   spreadSheetID: 19GALJvbgOQ5GDgZLvNrWZmvgviqTtcslViDEZAewVw4
   sheetID: Facil
   serviceAccountEmail: googlesheetsunity@unityapi-test.iam.gserviceaccount.com
   certificateName: unityapi-test-7311ad37cd10.p12
-  readRange: A2:C11
+  readRange: A2:D11
   clips:
   - {fileID: 8300000, guid: 67e4101f5bee16047b0782387109a748, type: 3}
   - {fileID: 8300000, guid: 9409fb82428e09d49888ce5307d218ea, type: 3}
@@ -38,5 +39,7 @@ MonoBehaviour:
     SFXMixerParameter: SFX
     ShadowValue: 0
     QualityTexture: 6
-    IndexResolution: 0
+    IndexResolution: -1
+    fullScreen: 1
+    idLocalization: 0
   AudioMixer: {fileID: 24100000, guid: fc470ee9da391e64087e1758c4022615, type: 2}

@@ -15,7 +15,7 @@ public class MenuController : TTMenuController
     {
         PlayerPrefs.SetString("PlayerName", InputPlayerName.text);
     }
-    protected override void Play()
+    public override void Play()
     {
         if(string.IsNullOrEmpty(InputPlayerName.text))
         {
@@ -23,9 +23,5 @@ public class MenuController : TTMenuController
             return;
         }        
         base.Play();
-    }    
-    //Canvas GetCanvas()
-    //{        
-    //    return HelperComponet.GetComponentInHierarchy<Canvas>(panelMenu);
-    //}
+    }  
 }
