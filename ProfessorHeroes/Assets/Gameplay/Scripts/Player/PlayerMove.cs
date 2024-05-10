@@ -80,12 +80,7 @@ public class PlayerMove : MonoBehaviour
         moveHorizontal = direccion.x * currectSpeed;
 
         animator.SetFloat("SpeedX", Mathf.Abs(moveHorizontal));        
-        animator.SetFloat("SpeedY", rb.velocity.y);
-        
-        if(Input.GetButtonDown("Jump"))
-        {
-            inputJump = true;            
-        }
+        animator.SetFloat("SpeedY", rb.velocity.y);        
     }
 
     private void FixedUpdate()
@@ -117,7 +112,7 @@ public class PlayerMove : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext callbackContext)
     {
-        if (isGround && !animator.GetBool("InCombat"))
+        if (isGround && !animator.GetBool("InCombat") && !animator.GetBool("Pickup") && !animator.GetBool("Takeit"))
         {
             isGround = false;
             rb.AddForce(new Vector2(0, jumpForze));
@@ -139,6 +134,9 @@ public class PlayerMove : MonoBehaviour
     }
     void Sprint(InputAction.CallbackContext context)
     {
+        if (animator.GetBool("Pickup") || animator.GetBool("Takeit"))
+            return;
+
         var holdInteraction = context.interaction as HoldInteraction;
         holdInteraction.duration = SprintDuration;
         if (context.started)

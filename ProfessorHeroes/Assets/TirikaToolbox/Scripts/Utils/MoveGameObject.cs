@@ -15,6 +15,30 @@ public struct ParameterOsillate
 
 public class MoveGameObject 
 {
+    public static void LerpingBetweenPosition(MonoBehaviour instance, Transform[] points, Transform gObject, float duration)
+    {
+        instance.StartCoroutine(LerpBetweenPositions(points, gObject, duration));
+    }
+    static IEnumerator LerpBetweenPositions(Transform[] points, Transform obj, float duration = 1)
+    {
+        int currentPointIndex = 0;
+        while (currentPointIndex <= points.Length - 1)
+        {
+            Vector3 startPos = obj.position;
+            Vector3 endPos = points[currentPointIndex].position;
+            float timeElapsed = 0;
+            while (timeElapsed < duration)
+            {
+                float t = timeElapsed / duration;
+                obj.position = Vector3.Lerp(startPos, endPos, t);
+                timeElapsed += Time.deltaTime;
+                yield return null;
+            }
+            obj.position = endPos;
+            currentPointIndex++;
+            yield return null;
+        }
+    }
     public static void TakeOscillate(MonoBehaviour instance, ParameterOsillate osillate)
     {
         instance.StartCoroutine(Oscillate(osillate.timer, osillate.frequency, osillate.amplitude, osillate.initialPosition, osillate.offset, osillate.transform));
