@@ -10,34 +10,31 @@ public enum AnimatorLayers
 }
 public class SwitchWeapon : MonoBehaviour
 {
-    public bool isLayerBase = true;
-    private Controlles controles;
+    public bool isLayerBase = true;    
     private Animator animator;
     PlayerCombat playerCombat;
     private void Awake()
     {
         playerCombat = GetComponent<PlayerCombat>();
-        controles = new();
+        
         animator = GetComponent<Animator>();
         if (animator == null)
             animator = GetComponentInChildren<Animator>();
         
     }
     private void OnEnable()
-    {
-        controles.Enable();
-        controles.Base.Weapon1.started += Weapon1;
-        controles.Base.Weapon2.started += Weapon2;
-        controles.Base.Weapon3.started += Weapon3;
-        controles.Base.Weapon4.started += Weapon4;
+    {        
+        InputManager.Instance.controles.Base.Weapon1.started += Weapon1;
+        InputManager.Instance.controles.Base.Weapon2.started += Weapon2;
+        InputManager.Instance.controles.Base.Weapon3.started += Weapon3;
+        InputManager.Instance.controles.Base.Weapon4.started += Weapon4;
     }
     private void OnDisable()
-    {
-        controles.Disable();
-        controles.Base.Weapon1.started -= Weapon1;
-        controles.Base.Weapon2.started -= Weapon2;
-        controles.Base.Weapon3.started -= Weapon3;
-        controles.Base.Weapon4.started -= Weapon4;
+    {        
+        InputManager.Instance.controles.Base.Weapon1.started -= Weapon1;
+        InputManager.Instance.controles.Base.Weapon2.started -= Weapon2;
+        InputManager.Instance.controles.Base.Weapon3.started -= Weapon3;
+        InputManager.Instance.controles.Base.Weapon4.started -= Weapon4;
     }
     public void Weapon1(InputAction.CallbackContext callbackContext)
     {

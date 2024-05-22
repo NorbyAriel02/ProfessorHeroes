@@ -65,7 +65,8 @@ public class BowAttack : StateMachineBehaviour
         bow.SetActive(false);
         bowView.SetActive(false);
         Cursor.visible = false;
-        OnShoot?.Invoke(dir);
+        if (!animator.GetBool("CanceledAttack"))
+            OnShoot?.Invoke(dir);
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

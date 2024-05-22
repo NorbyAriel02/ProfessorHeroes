@@ -52,23 +52,17 @@ public class OperationController : MonoBehaviour
         result.gameObject.SetActive(false);
         operation.gameObject.SetActive(false);
         Correctas++;
-        UI.txtCorrectas.text = Correctas.ToString();
-        if (IsWin())
-        {            
-            UI.ShowWin();
-            UpdateScoreTable();
-        }            
+                  
     }    
     void Incorrecto()
     {
         AudioManager.Instance.PlayOnShot(sfxOperacionIncorrecta);
         Incorrectas++;
-        UI.txtIncorrectas.text = Incorrectas.ToString();
+        //UI.txtIncorrectas.text = Incorrectas.ToString();
         result.SetMark();
         operation.SetMark();
         op = false;
-        re = false;
-        UI.ShowError();
+        re = false;        
     }
     bool IsWin()
     {
@@ -81,23 +75,5 @@ public class OperationController : MonoBehaviour
         }
         return true;
     }
-    void UpdateScoreTable()
-    {
-        List<Record> records = Sheet.ReadDataRecords(gameConfig.readRange);
-        Record record = new Record();
-        Row updateRow = new Row();
-        record.level = level;
-        record.usename = PlayerPrefs.GetString("PlayerName");
-        float.TryParse(UI.txtTimer.text, out record.timer);
-        records.Add(record);
-
-        records.Sort((x, y) => x.timer.CompareTo(y.timer));
-
-        if (records.Count > 10)
-        {
-            records.RemoveAt(10);
-        }
-
-        Sheet.UpdateDataRecords(gameConfig.readRange, records);
-    }
+    
 }

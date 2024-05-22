@@ -11,8 +11,7 @@ public class WorkingController : MonoBehaviour
     public Vector2 boxSize;
     public Transform[] pointsCarryIt;
     public Transform[] pointsPickup;
-    public float durationLerd = 0.1f;
-    private Controlles controles;
+    public float durationLerd = 0.1f;    
     private Animator animator;
     PlayerCombat playerCombat;
     SwitchWeapon switchWeapon;
@@ -22,23 +21,21 @@ public class WorkingController : MonoBehaviour
     {
         switchWeapon = GetComponent<SwitchWeapon>();
         playerCombat = GetComponent<PlayerCombat>();
-        controles = new();
+        
         animator = GetComponent<Animator>();
         if (animator == null)
             animator = GetComponentInChildren<Animator>();
 
     }
     private void OnEnable()
-    {
-        controles.Enable();
-        controles.Base.Pickup.started += Pickup;
-        controles.Base.Takeit.started += Takeit;        
+    {        
+        InputManager.Instance.controles.Base.Pickup.started += Pickup;
+        InputManager.Instance.controles.Base.Takeit.started += Takeit;        
     }
     private void OnDisable()
-    {
-        controles.Disable();
-        controles.Base.Pickup.started -= Pickup;
-        controles.Base.Takeit.started -= Takeit;
+    {     
+        InputManager.Instance.controles.Base.Pickup.started -= Pickup;
+        InputManager.Instance.controles.Base.Takeit.started -= Takeit;
     }
 
     public void Pickup(InputAction.CallbackContext callbackContext)

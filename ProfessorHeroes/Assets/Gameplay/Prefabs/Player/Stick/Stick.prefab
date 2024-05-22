@@ -178,6 +178,9 @@ GameObject:
   - component: {fileID: 1347051937612430084}
   - component: {fileID: 7498446087208840356}
   - component: {fileID: 4205940679661218488}
+  - component: {fileID: 5772311748612819783}
+  - component: {fileID: 864282488809243152}
+  - component: {fileID: 5205718530273070197}
   m_Layer: 0
   m_Name: Stick
   m_TagString: Untagged
@@ -389,8 +392,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a207fd41e6a0fd143a60ee3ef1ba2b6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 30
-  prefabArrow: {fileID: 2484607658409904821, guid: c04846d368519fe48be79bb0b135294f, type: 3}
+  linealFunction:
+    B: 5
+    M: 0.25
+    X: 0
+  baseSpeed: 20
   spawnPointArrow: {fileID: 2292048085308105317}
   AttackSword: {fileID: 718424304211149055}
   boxSize: {x: 1, y: 1}
@@ -446,6 +452,48 @@ MonoBehaviour:
   - {fileID: 7569969890156007290}
   - {fileID: 5063245669668507269}
   durationLerd: 0.05
+--- !u!114 &5772311748612819783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1434717642495313481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bfc7ffd9276fb540928041de870aa3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelData: {fileID: 11400000, guid: c8287ba63971d9c4e85f7af6b893d724, type: 2}
+--- !u!114 &864282488809243152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1434717642495313481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47a014d5932cd0b42bd2672b8b981780, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: e9ea626b04b756f4f9d8aeb6e2e3d0a6, type: 2}
+--- !u!114 &5205718530273070197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1434717642495313481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d88a4cc7802e15f4d8ebbda2f71e780e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fuerza: {fileID: 11400000, guid: 0cf243be0db500c4ba3c685f908c911d, type: 2}
+  forma: {fileID: 11400000, guid: ae0bc45db34310a44b7bbd53938f4270, type: 2}
+  desArco: {fileID: 11400000, guid: 82fea2787e9ab6a4fa4df294d4a4067f, type: 2}
+  desEspada: {fileID: 11400000, guid: 378398f577ac4b84a9c972abed6c96c7, type: 2}
 --- !u!1 &1621780251899903984
 GameObject:
   m_ObjectHideFlags: 0
@@ -496,7 +544,7 @@ GameObject:
   m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &718424304211149055
 Transform:
   m_ObjectHideFlags: 0

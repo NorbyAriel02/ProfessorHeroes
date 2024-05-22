@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
-[CreateAssetMenu(fileName = "New GameConfig", menuName = "NAW Config/GameConfig")]
+[CreateAssetMenu(fileName = "New GameConfig", menuName = "TIRIKA/GameConfig")]
 public class GameConfig : ScriptableObject
 {
     [Header("Escenas")]

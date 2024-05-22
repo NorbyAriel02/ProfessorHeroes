@@ -4,19 +4,17 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
+using UnityEngine.UI;
 
 //Wave Function Collapse
 public class PlayerMove : MonoBehaviour
-{
-    public float moveSpeed = 1.0f;
-    public float moveSpeedSprint = 2.0f;
-    public float SprintDuration = 2.0f;
-    public float moveSmooth = 0.1f;
+{        
+    public float moveSmooth = 0.1f;    
+    
     private float moveHorizontal = 0;
     private Rigidbody2D rb;
     private Vector3 speed = Vector3.zero;
     private bool seeRight = true;
-    //private float coyoteTime = 0;
 
     [Header("Jump")]
     public float jumpForze = 100.0f;
@@ -39,30 +37,27 @@ public class PlayerMove : MonoBehaviour
 
     [Header("Animation")]
     private Animator animator;
-
     public Vector2 direccion;
-    private Controlles controles;
-    private float currectSpeed = 0f;
+        
+    private float currectSpeed = 0f;    
+    private float timer;
     private void Awake()
     {
-        controles = new();
+        
     }
     private void OnEnable()
-    {
-        controles.Enable();
-        controles.Base.Jump.started += Jump;
-        controles.Base.Sprint.started += Sprint;
-        controles.Base.Sprint.performed += Sprint;
-        controles.Base.Sprint.canceled += Sprint;
+    {        
+        InputManager.Instance.controles.Base.Jump.started += Jump;
+        InputManager.Instance.OnPressSprint += StartSprint;
+        InputManager.Instance.OnHoldSprint += EndSprint;
+        InputManager.Instance.OnCancelSprint += EndSprint;
     }
     private void OnDisable()
-    {
-        controles.Disable();
-        controles.Base.Jump.started -= Jump;
-        controles.Base.Sprint.started -= Sprint;
-        controles.Base.Sprint.performed -= Sprint;
-        controles.Base.Sprint.canceled -= Sprint;
-        
+    {        
+        InputManager.Instance.controles.Base.Jump.started -= Jump;
+        InputManager.Instance.OnPressSprint -= StartSprint;
+        InputManager.Instance.OnHoldSprint -= EndSprint;
+        InputManager.Instance.OnCancelSprint -= EndSprint;
     }
     private void Start()
     {
@@ -70,13 +65,13 @@ public class PlayerMove : MonoBehaviour
         animator = GetComponent<Animator>();    
         if(animator == null)
             animator = GetComponentInChildren<Animator>();
-        
-        currectSpeed = moveSpeed;
+                
+        currectSpeed = CalculeSpeed();
     }
 
     private void Update()
     {
-        direccion = controles.Base.Move.ReadValue<Vector2>();
+        direccion = InputManager.Instance.controles.Base.Move.ReadValue<Vector2>();
         moveHorizontal = direccion.x * currectSpeed;
 
         animator.SetFloat("SpeedX", Mathf.Abs(moveHorizontal));        
@@ -93,8 +88,7 @@ public class PlayerMove : MonoBehaviour
         }
         else
             Move(0);
-    }
-
+    }    
     private void Move(float move)
     {
         Vector3 vel = new Vector2(move, rb.velocity.y);
@@ -109,7 +103,6 @@ public class PlayerMove : MonoBehaviour
             Turn();
         }                
     }
-
     public void Jump(InputAction.CallbackContext callbackContext)
     {
         if (isGround && !animator.GetBool("InCombat") && !animator.GetBool("Pickup") && !animator.GetBool("Takeit"))
@@ -132,24 +125,23 @@ public class PlayerMove : MonoBehaviour
         else
             transform.eulerAngles = new Vector3(0,180,0);
     }
-    void Sprint(InputAction.CallbackContext context)
-    {
+    private void StartSprint()
+    {   
+        //Si lleva carga no puede correr
         if (animator.GetBool("Pickup") || animator.GetBool("Takeit"))
             return;
 
-        var holdInteraction = context.interaction as HoldInteraction;
-        holdInteraction.duration = SprintDuration;
-        if (context.started)
-        {
-            currectSpeed = moveSpeedSprint;
-            animator.SetBool("Sprint", true);
-        }
-        
-        if(context.performed || context.canceled)
-        {
-            currectSpeed = moveSpeed;
-            animator.SetBool("Sprint", false);
-        }
+        //Si esta en el aire no puede correr
+        if (!animator.GetBool("InGround"))
+            return;
+
+        animator.SetBool("Sprint", true);
+        currectSpeed = CalculeSpeed();
+    }
+    public void EndSprint()
+    {
+        animator.SetBool("Sprint", false);
+        currectSpeed = CalculeSpeed();
     }
     public void ParticleJumpStart()
     {
@@ -176,15 +168,24 @@ public class PlayerMove : MonoBehaviour
                 HardFall();
         }            
     }
-
-    void SoftFall()
+    private void SoftFall()
     {
         particleRun.Play();
         AudioManager.Instance.PlayOnShot(sfxSoftFall);
     }
-    void HardFall()
+    private void HardFall()
     {
         particleRun.Play();
         AudioManager.Instance.PlayOnShot(sfxHardFall);
+    }
+    private float CalculeSpeed()
+    {
+
+        if (animator.GetBool("Sprint"))
+            currectSpeed = PlayerStats.Instance.Sprint.B + MathHelper.GetY(PlayerStats.Instance.Sprint);
+        else
+            currectSpeed = PlayerStats.Instance.Sprint.B;
+
+        return currectSpeed;
     }
 }

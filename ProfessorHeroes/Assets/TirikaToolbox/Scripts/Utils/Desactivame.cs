@@ -11,6 +11,7 @@ public class Desactivame : MonoBehaviour
     }
     void Off()
     {
+        gameObject.transform.parent = null;
         gameObject.SetActive(false);
     }
 }

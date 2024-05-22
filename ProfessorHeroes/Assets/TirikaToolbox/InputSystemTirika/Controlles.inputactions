@@ -94,6 +94,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "CancelAttack",
+                    "type": "Button",
+                    "id": "e0874216-acf7-47a8-849d-3d5c8cc3d0dc",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Stats",
+                    "type": "Button",
+                    "id": "d493c4a1-baee-414a-b34a-9a661522a226",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -233,7 +251,7 @@
                     "name": "",
                     "id": "5bceb2e9-9e29-46b1-9018-b94fb6b358da",
                     "path": "<Keyboard>/leftShift",
-                    "interactions": "Hold(duration=1)",
+                    "interactions": "Hold(duration=2)",
                     "processors": "",
                     "groups": "",
                     "action": "Sprint",
@@ -303,6 +321,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Takeit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d15abce4-f082-46b6-bc9f-9df397580a7a",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CancelAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d6c1d676-6c3d-45b3-94cc-87b7c6c02c84",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Stats",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

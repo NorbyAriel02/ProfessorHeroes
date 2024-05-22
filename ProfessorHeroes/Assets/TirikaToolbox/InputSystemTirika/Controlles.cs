@@ -116,6 +116,24 @@ public partial class @Controlles: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CancelAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""e0874216-acf7-47a8-849d-3d5c8cc3d0dc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Stats"",
+                    ""type"": ""Button"",
+                    ""id"": ""d493c4a1-baee-414a-b34a-9a661522a226"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -255,7 +273,7 @@ public partial class @Controlles: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""5bceb2e9-9e29-46b1-9018-b94fb6b358da"",
                     ""path"": ""<Keyboard>/leftShift"",
-                    ""interactions"": ""Hold(duration=1)"",
+                    ""interactions"": ""Hold(duration=2)"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Sprint"",
@@ -327,6 +345,28 @@ public partial class @Controlles: IInputActionCollection2, IDisposable
                     ""action"": ""Takeit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d15abce4-f082-46b6-bc9f-9df397580a7a"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CancelAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d6c1d676-6c3d-45b3-94cc-87b7c6c02c84"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Stats"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -345,6 +385,8 @@ public partial class @Controlles: IInputActionCollection2, IDisposable
         m_Base_Weapon4 = m_Base.FindAction("Weapon4", throwIfNotFound: true);
         m_Base_Pickup = m_Base.FindAction("Pickup", throwIfNotFound: true);
         m_Base_Takeit = m_Base.FindAction("Takeit", throwIfNotFound: true);
+        m_Base_CancelAttack = m_Base.FindAction("CancelAttack", throwIfNotFound: true);
+        m_Base_Stats = m_Base.FindAction("Stats", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -416,6 +458,8 @@ public partial class @Controlles: IInputActionCollection2, IDisposable
     private readonly InputAction m_Base_Weapon4;
     private readonly InputAction m_Base_Pickup;
     private readonly InputAction m_Base_Takeit;
+    private readonly InputAction m_Base_CancelAttack;
+    private readonly InputAction m_Base_Stats;
     public struct BaseActions
     {
         private @Controlles m_Wrapper;
@@ -430,6 +474,8 @@ public partial class @Controlles: IInputActionCollection2, IDisposable
         public InputAction @Weapon4 => m_Wrapper.m_Base_Weapon4;
         public InputAction @Pickup => m_Wrapper.m_Base_Pickup;
         public InputAction @Takeit => m_Wrapper.m_Base_Takeit;
+        public InputAction @CancelAttack => m_Wrapper.m_Base_CancelAttack;
+        public InputAction @Stats => m_Wrapper.m_Base_Stats;
         public InputActionMap Get() { return m_Wrapper.m_Base; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -469,6 +515,12 @@ public partial class @Controlles: IInputActionCollection2, IDisposable
             @Takeit.started += instance.OnTakeit;
             @Takeit.performed += instance.OnTakeit;
             @Takeit.canceled += instance.OnTakeit;
+            @CancelAttack.started += instance.OnCancelAttack;
+            @CancelAttack.performed += instance.OnCancelAttack;
+            @CancelAttack.canceled += instance.OnCancelAttack;
+            @Stats.started += instance.OnStats;
+            @Stats.performed += instance.OnStats;
+            @Stats.canceled += instance.OnStats;
         }
 
         private void UnregisterCallbacks(IBaseActions instance)
@@ -503,6 +555,12 @@ public partial class @Controlles: IInputActionCollection2, IDisposable
             @Takeit.started -= instance.OnTakeit;
             @Takeit.performed -= instance.OnTakeit;
             @Takeit.canceled -= instance.OnTakeit;
+            @CancelAttack.started -= instance.OnCancelAttack;
+            @CancelAttack.performed -= instance.OnCancelAttack;
+            @CancelAttack.canceled -= instance.OnCancelAttack;
+            @Stats.started -= instance.OnStats;
+            @Stats.performed -= instance.OnStats;
+            @Stats.canceled -= instance.OnStats;
         }
 
         public void RemoveCallbacks(IBaseActions instance)
@@ -532,5 +590,7 @@ public partial class @Controlles: IInputActionCollection2, IDisposable
         void OnWeapon4(InputAction.CallbackContext context);
         void OnPickup(InputAction.CallbackContext context);
         void OnTakeit(InputAction.CallbackContext context);
+        void OnCancelAttack(InputAction.CallbackContext context);
+        void OnStats(InputAction.CallbackContext context);
     }
 }

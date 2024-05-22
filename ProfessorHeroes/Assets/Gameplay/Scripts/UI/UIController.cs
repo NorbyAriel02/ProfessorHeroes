@@ -1,36 +1,38 @@
-using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Interactions;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-public class UIController : TTMenuController
+public class UIController : MonoBehaviour
 {
     public GameObject panelError;
     public GameObject winPanel;
-    public float delay = 1;
-    public float timer;
-    public TMP_Text txtCorrectas;
-    public TMP_Text txtIncorrectas;
-    public TMP_Text txtTimer;
-    public TMP_Text txtWinTimer;
-    public TMP_Text txtWinErrors;
+    public TMP_Text txtLevel;
+    public Image imgExp;
+    public Image imgSprint;
+    public PlayerStats playerStats;    
     public KeyCode PauseKey;
+    
+    private void Awake()
+    {
+        
+    }
     private void OnEnable()
-    {
-        timer = 0;
+    {        
+        LevelSystem.ByAddingExperience += SetExpAndLevel;
+        LevelSystem.StartLevelSystem += SetExpAndLevel;
     }
-    public void ShowError()
+    private void OnDisable()
     {
-        panelError.SetActive(true);
-        StartCoroutine(DelayErrorMensaje());
+        LevelSystem.ByAddingExperience -= SetExpAndLevel;
+        LevelSystem.StartLevelSystem -= SetExpAndLevel;
     }
-    public void ShowWin()
+    private void Start()
     {
-        txtWinTimer.text = txtTimer.text;
-        txtWinErrors.text = txtIncorrectas.text;
-        winPanel.SetActive(true);
-        Time.timeScale = 0f;
-    }
+        playerStats = GetComponent<PlayerStats>();
+    }    
     public void ShowPause()
     {
         ChangeOfScene.Instance.OpenPausePanel();
@@ -41,45 +43,28 @@ public class UIController : TTMenuController
         winPanel.SetActive(false);
         Time.timeScale = 1f;
     }
-    private IEnumerator DelayErrorMensaje()
-    {
-        yield return new WaitForSeconds(delay);
-        panelError.SetActive(false);
-    }
+    
     public void Reload()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }    
     private void Update()
     {
-        if(Input.GetKeyDown(PauseKey))
-        {
-            ShowPause();
-        }
+        //if(Input.GetKeyDown(PauseKey))
+        //{
+        //    ShowPause();
+        //}
+        UpdateSliderSprint();
     }
-    private void FixedUpdate()
+        
+    public void SetExpAndLevel(LevelSystemData data)
     {
-        timer += Time.deltaTime;
-        txtTimer.text = timer.ToString("0.000");
+        txtLevel.text = "Level " + data.currentlevel;
+        float value = (float)data.currentExp / (float)data.requiredExpToNextLevel;
+        imgExp.fillAmount = value;
     }
-    public override void Menu()
-    {
-        Time.timeScale = 1f;
-        base.Menu();
-    }
-    public override void Play()
-    {
-        Time.timeScale = 1f;
-        base.Play();
-    }
-    public override void Close()
-    {
-        Time.timeScale = 1f;
-        base.Close();
-    }
-    public override void HighScore()
-    {
-        Time.timeScale = 1f;
-        base.HighScore();
-    }
+    private void UpdateSliderSprint()
+    {        
+        imgSprint.fillAmount = InputManager.Instance.GetSpritDurationNormalize();
+    }    
 }

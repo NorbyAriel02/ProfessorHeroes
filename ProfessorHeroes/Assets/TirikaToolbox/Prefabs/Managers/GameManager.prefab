@@ -225,6 +225,7 @@ GameObject:
   - component: {fileID: 2089998712799138012}
   - component: {fileID: 6529671334027464920}
   - component: {fileID: 6304127053977965925}
+  - component: {fileID: 1235970014514280210}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -261,6 +262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameConfig: {fileID: 11400000, guid: b662a4e54c049aa40839ba79a4523360, type: 2}
+  _activeLocate: 0
 --- !u!114 &6304127053977965925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,6 +276,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Setting: {fileID: 11400000, guid: b662a4e54c049aa40839ba79a4523360, type: 2}
+--- !u!114 &1235970014514280210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5607653740992721141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54e3109484211f94e8cae706ff912719, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprintAction:
+    m_Name: Sprint
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: da38adce-f1bc-4450-9ef9-b9f847c6f204
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  sprintHoldTime: 1
 --- !u!1 &8827457205124631370
 GameObject:
   m_ObjectHideFlags: 0
