@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   factor: 1.5
   baseExperience: 100
-  totalAccumulatedExp: 1080
-  currentExp: 240
-  requiredExpToNextLevel: 506
-  currentlevel: 4
+  totalAccumulatedExp: 1350
+  currentExp: 30
+  requiredExpToNextLevel: 759
+  currentlevel: 5
   maxLevel: 20
   attributes: {fileID: 11400000, guid: 6d293efc4312962459fb1d858f6e1e46, type: 2}
   AvialablePoints: 0

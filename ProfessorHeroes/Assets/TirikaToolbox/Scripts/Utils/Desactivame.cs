@@ -10,8 +10,7 @@ public class Desactivame : MonoBehaviour
         Invoke("Off", delay);
     }
     void Off()
-    {
-        gameObject.transform.parent = null;
+    {        
         gameObject.SetActive(false);
     }
 }

@@ -3,4 +3,8 @@ using UnityEngine;
 public class AttributeObject : GenericObject
 {
     public int value = 1;
+    public void ResetValue()
+    {
+        value = 1;
+    }
 }

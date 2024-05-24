@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
+//using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Interactions;
-using UnityEngine.UI;
 
 //Wave Function Collapse
 public class PlayerMove : MonoBehaviour
@@ -16,9 +13,8 @@ public class PlayerMove : MonoBehaviour
     private Vector3 speed = Vector3.zero;
     private bool seeRight = true;
 
-    [Header("Jump")]
-    public float jumpForze = 100.0f;
-    public LayerMask WahtIsGroundMask;
+    [Header("Jump")]    
+    public LayerMask WhatIsGroundMask;
     public Transform boxController;
     public Vector3 boxSize;
     public bool isGround;
@@ -48,17 +44,17 @@ public class PlayerMove : MonoBehaviour
     private void OnEnable()
     {        
         InputManager.Instance.controles.Base.Jump.started += Jump;
-        InputManager.Instance.OnPressSprint += StartSprint;
-        InputManager.Instance.OnHoldSprint += EndSprint;
-        InputManager.Instance.OnCancelSprint += EndSprint;
+        PlayerStats.Instance.OnPressSprint += StartSprint;
+        PlayerStats.Instance.OnHoldSprint += EndSprint;
+        PlayerStats.Instance.OnCancelSprint += EndSprint;
     }
     private void OnDisable()
     {        
         InputManager.Instance.controles.Base.Jump.started -= Jump;
-        InputManager.Instance.OnPressSprint -= StartSprint;
-        InputManager.Instance.OnHoldSprint -= EndSprint;
-        InputManager.Instance.OnCancelSprint -= EndSprint;
-    }
+        PlayerStats.Instance.OnPressSprint -= StartSprint;
+        PlayerStats.Instance.OnHoldSprint -= EndSprint;
+        PlayerStats.Instance.OnCancelSprint -= EndSprint;
+    }   
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -73,16 +69,15 @@ public class PlayerMove : MonoBehaviour
     {
         direccion = InputManager.Instance.controles.Base.Move.ReadValue<Vector2>();
         moveHorizontal = direccion.x * currectSpeed;
-
-        animator.SetFloat("SpeedX", Mathf.Abs(moveHorizontal));        
+        animator.SetFloat("SpeedX", Mathf.Abs((int)rb.velocity.x));        
         animator.SetFloat("SpeedY", rb.velocity.y);        
     }
 
     private void FixedUpdate()
     {
-        if(!animator.GetBool("InCombat"))//si no esta en combate
-        {
-            isGround = Physics2D.OverlapBox(boxController.position, boxSize, 0, WahtIsGroundMask);
+        isGround = Physics2D.OverlapBox(boxController.position, boxSize, 0, WhatIsGroundMask);
+        if (!animator.GetBool("InCombat"))//si no esta en combate
+        {            
             animator.SetBool("InGround", isGround);
             Move(moveHorizontal * Time.fixedDeltaTime);            
         }
@@ -105,11 +100,13 @@ public class PlayerMove : MonoBehaviour
     }
     public void Jump(InputAction.CallbackContext callbackContext)
     {
+        float jumpForze = MathHelper.GetY(PlayerStats.Instance.Jump); 
+        print("Force jump " + jumpForze);
         if (isGround && !animator.GetBool("InCombat") && !animator.GetBool("Pickup") && !animator.GetBool("Takeit"))
         {
             isGround = false;
             rb.AddForce(new Vector2(0, jumpForze));
-            AudioManager.Instance.PlayOnShot(sfxJump);            
+            AudioManager.Instance.PlayOnShot(sfxJump);       
         }
         
         if (rb.velocity.y < 0)
@@ -137,11 +134,13 @@ public class PlayerMove : MonoBehaviour
 
         animator.SetBool("Sprint", true);
         currectSpeed = CalculeSpeed();
+        print("sprint desde move " +  currectSpeed);
     }
     public void EndSprint()
     {
         animator.SetBool("Sprint", false);
         currectSpeed = CalculeSpeed();
+        print("Cancelo desde move " + currectSpeed);
     }
     public void ParticleJumpStart()
     {
@@ -180,7 +179,6 @@ public class PlayerMove : MonoBehaviour
     }
     private float CalculeSpeed()
     {
-
         if (animator.GetBool("Sprint"))
             currectSpeed = PlayerStats.Instance.Sprint.B + MathHelper.GetY(PlayerStats.Instance.Sprint);
         else

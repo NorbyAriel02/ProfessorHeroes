@@ -4,13 +4,14 @@ using UnityEngine.InputSystem;
 
 public class PlayerCombat : MonoBehaviour
 {
-    [Header("Arco")]
-    public LinealFunction linealFunction;
+    [Header("Arco")]    
     public float baseSpeed = 10f; // Velocidad base de la flecha    
     public GameObject spawnPointArrow;
     private ObjectPoolBehaviour arrowPool;
-    [Header("Espada")]
+
+    [Header("Espada")]    
     public Transform AttackSword;
+    public GameObject particlePolvo;
     public Vector2 boxSize;    
     private bool IsArcher = true;
     private Animator animator;    
@@ -77,8 +78,9 @@ public class PlayerCombat : MonoBehaviour
     }
     public void AttackWithSword()
     {
-        int damage = Mathf.RoundToInt(playerStats.fuerza.value * Mathf.Pow(2, playerStats.desEspada.value));        
-        
+        //int damage = Mathf.RoundToInt(playerStats.fuerza.value * Mathf.Pow(2, playerStats.desEspada.value));        
+        float damage = MathHelper.GetY(playerStats.Sword);
+        print("Damage sword " + damage);
         AttackSword.gameObject.SetActive(true);
         RaycastHit2D[] golpeados = Physics2D.BoxCastAll(AttackSword.position, boxSize, 0, Vector2.zero, 1);
         foreach(RaycastHit2D coll in golpeados)
@@ -86,12 +88,18 @@ public class PlayerCombat : MonoBehaviour
             Health health = coll.collider.GetComponent<Health>();
             if (health != null)
                 health.TakeDamage(damage, gameObject);
+            else
+            {
+                //TODO partidulas de polvo
+                Instantiate(particlePolvo, AttackSword.position, AttackSword.rotation);
+            }                
         }        
     }
     public void ShootArrow(Vector3 dir)
     {
         float arrowSpeed = CalculateInitialSpeed();
-        float damage = playerStats.fuerza.value;        
+        float damage = playerStats.fuerza.value;
+        print("Damage bow " + damage);
         GameObject arrow = arrowPool.GetPooledObject();        
         arrow.GetComponent<ArrowProjectile>()
                 .SetInit(
@@ -116,9 +124,10 @@ public class PlayerCombat : MonoBehaviour
         Gizmos.DrawWireCube(AttackSword.position, boxSize);
     }
     // Método para calcular la velocidad inicial de la flecha
+    //con un error variable entre un -max y max
+    //este error disminuye entre mayor sea la habilidad del personaje con el arco
     public float CalculateInitialSpeed()
-    {
-        linealFunction.X = playerStats.desArco.value;
-        return (baseSpeed + playerStats.fuerza.value) + MathHelper.GetError(linealFunction);
+    {        
+        return (baseSpeed + playerStats.fuerza.value) + MathHelper.GetError(playerStats.Bow);
     }
 }

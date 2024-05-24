@@ -14,4 +14,13 @@ public class LevelSystemData : ScriptableObject
     public int maxLevel;//maximo nivel alcanzable
     public DataBaseObject attributes;
     public int AvialablePoints = 4;
+    [ContextMenu("Reset Item value")]
+    public void ResetItemValue()
+    {
+        totalAccumulatedExp = 0;
+        currentExp = 0;
+        requiredExpToNextLevel = 0;
+        currentlevel = 0;
+        AvialablePoints = 0;
+    }
 }

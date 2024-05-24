@@ -17,5 +17,5 @@ public abstract class DataBaseObject : ScriptableObject
         {
             objs[i].Index = i;
         }
-    }
+    }    
 }

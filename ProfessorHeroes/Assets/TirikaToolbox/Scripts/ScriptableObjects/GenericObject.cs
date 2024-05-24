@@ -8,5 +8,5 @@ public abstract class GenericObject : ScriptableObject
     [TextArea(2, 5)]
     public string description;
     [SerializeField]private int index;
-    public int Index { get { return index; } set { index = value; } }
+    public int Index { get { return index; } set { index = value; } }    
 }

@@ -21,7 +21,8 @@ public class  PanelStat
 public class StatController : MonoBehaviour
 {
     public LevelSystemData levelData;
-    public GameObject panel;    
+    public GameObject panel;
+    public TMP_Text txtDisponibles;
     public List<PanelStat> stats;
     private Controlles controles;
     private void Awake()
@@ -43,6 +44,15 @@ public class StatController : MonoBehaviour
     void Start()
     {
         CheckButtonStatus();
+        SetTextStats();
+        txtDisponibles.text = "Disponibles: " + levelData.AvialablePoints;
+    }
+    void SetTextStats()
+    {
+        foreach (var item in stats)
+        {
+            item.text.text = item.attribute.value.ToString();
+        }
     }
     void AddAvailablePoints(LevelSystemData data)
     {
@@ -64,6 +74,11 @@ public class StatController : MonoBehaviour
     void SubtractOnePoint()
     {
         levelData.AvialablePoints--;
+        SetTextDisponibles();
+    }
+    void SetTextDisponibles()
+    {
+        txtDisponibles.text = "Disponibles: " + levelData.AvialablePoints;
     }
     void CheckButtonStatus()
     {
@@ -86,7 +101,7 @@ public class StatController : MonoBehaviour
     }
     public void SetPointsAvailable(int _pointsAvailable)
     {
-        levelData.AvialablePoints = _pointsAvailable;
+        levelData.AvialablePoints += _pointsAvailable;
         ActiveButtons();
     }
     void ActiveButtons()
@@ -98,6 +113,7 @@ public class StatController : MonoBehaviour
     }
     public void ShowPanelStats(InputAction.CallbackContext callbackContext)
     {
+        SetTextDisponibles();
         ShowHiddenPanel();
     }
 }

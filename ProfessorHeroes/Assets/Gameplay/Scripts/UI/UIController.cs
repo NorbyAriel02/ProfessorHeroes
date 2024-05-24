@@ -12,7 +12,7 @@ public class UIController : MonoBehaviour
     public TMP_Text txtLevel;
     public Image imgExp;
     public Image imgSprint;
-    public PlayerStats playerStats;    
+    
     public KeyCode PauseKey;
     
     private void Awake()
@@ -31,7 +31,7 @@ public class UIController : MonoBehaviour
     }
     private void Start()
     {
-        playerStats = GetComponent<PlayerStats>();
+        
     }    
     public void ShowPause()
     {
@@ -65,6 +65,6 @@ public class UIController : MonoBehaviour
     }
     private void UpdateSliderSprint()
     {        
-        imgSprint.fillAmount = InputManager.Instance.GetSpritDurationNormalize();
+        imgSprint.fillAmount = PlayerStats.Instance.GetSpritDurationNormalize();
     }    
 }

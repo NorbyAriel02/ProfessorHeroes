@@ -168,7 +168,7 @@ MonoBehaviour:
     initialPosition: {x: 0, y: 0, z: 0}
     offset: {x: 0, y: 0, z: 0}
     transform: {fileID: 0}
-  sfx: {fileID: 0}
+  sfx: {fileID: 8300000, guid: 129c31521c48d9c4fb6d05bd575bc490, type: 3}
 --- !u!114 &1571813494581848021
 MonoBehaviour:
   m_ObjectHideFlags: 0
