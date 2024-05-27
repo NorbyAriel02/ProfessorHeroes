@@ -8,5 +8,6 @@ public class ObjectPoolData : ScriptableObject
     [Header("Settings")]
     public GameObject objectToPool;
     public int amountToPool;
+    public int Index;
     public bool shouldExpand;
 }

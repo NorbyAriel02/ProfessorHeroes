@@ -17,9 +17,11 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private LinealFunction lfSword;
     [SerializeField] private LinealFunction lfBow;
     [SerializeField] private LinealFunction lfJump;
+    [SerializeField] private LinealFunction lfHealth;
     public UnityAction OnPressSprint;
     public UnityAction OnHoldSprint;
     public UnityAction OnCancelSprint;
+    private LevelSystem playerLevel;
 
     private bool isRunning;
     private float timer;
@@ -43,6 +45,11 @@ public class PlayerStats : MonoBehaviour
         InputManager.Instance.controles.Base.Sprint.started -= OnAtiveSprint;
         InputManager.Instance.controles.Base.Sprint.performed -= OnAtiveSprint;
         InputManager.Instance.controles.Base.Sprint.canceled -= OnAtiveSprint;
+    }
+    private void Start()
+    {
+        playerLevel = GetComponent<LevelSystem>();
+        timer = SprintDuration;
     }
     public LinealFunction Sprint
     { 
@@ -76,6 +83,14 @@ public class PlayerStats : MonoBehaviour
             return lfBow;
         }
     }
+    public LinealFunction Health
+    {
+        get
+        {
+            lfHealth.X = playerLevel.levelData.currentlevel;
+            return lfHealth;
+        }
+    }
     public float SprintDuration
     {
         get
@@ -86,10 +101,6 @@ public class PlayerStats : MonoBehaviour
         }
     }   
     
-    private void Start()
-    {
-        timer = SprintDuration;
-    }
     private void FixedUpdate()
     {
         UpdateSprintDuration();

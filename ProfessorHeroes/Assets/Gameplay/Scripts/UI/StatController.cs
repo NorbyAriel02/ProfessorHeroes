@@ -32,13 +32,13 @@ public class StatController : MonoBehaviour
     private void OnEnable()
     {
         controles.Enable();
-        LevelSystem.WhenLevelingUp += AddAvailablePoints;
+        LevelSystem.WhenLevelingUp += OnLevelUP;
         controles.Base.Stats.started += ShowPanelStats;
     }
     private void OnDisable()
     {
         controles.Disable();
-        LevelSystem.WhenLevelingUp -= AddAvailablePoints;
+        LevelSystem.WhenLevelingUp -= OnLevelUP;
         controles.Base.Stats.started -= ShowPanelStats;
     }
     void Start()
@@ -54,9 +54,9 @@ public class StatController : MonoBehaviour
             item.text.text = item.attribute.value.ToString();
         }
     }
-    void AddAvailablePoints(LevelSystemData data)
+    void OnLevelUP(LevelSystemData data)
     {
-        SetPointsAvailable(4);
+        ActiveButtons();
     }
     public void AddStat(AttributeObject stat)
     {
@@ -98,12 +98,7 @@ public class StatController : MonoBehaviour
             Cursor.visible = true;
         else
             Cursor.visible = false;
-    }
-    public void SetPointsAvailable(int _pointsAvailable)
-    {
-        levelData.AvialablePoints += _pointsAvailable;
-        ActiveButtons();
-    }
+    }    
     void ActiveButtons()
     {
         foreach (PanelStat panel in stats)

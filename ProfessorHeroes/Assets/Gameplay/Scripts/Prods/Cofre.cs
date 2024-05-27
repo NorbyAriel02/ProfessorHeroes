@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.FPS.Game;
+using TIRIKA;
 using UnityEditor.Localization.Plugins.Google.Columns;
 using UnityEngine;
 

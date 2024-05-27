@@ -180,6 +180,7 @@ GameObject:
   - component: {fileID: 5772311748612819783}
   - component: {fileID: 864282488809243152}
   - component: {fileID: 5205718530273070197}
+  - component: {fileID: 2958990742201357644}
   m_Layer: 0
   m_Name: Stick
   m_TagString: Untagged
@@ -399,8 +400,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseSpeed: 20
   spawnPointArrow: {fileID: 2292048085308105317}
+  arrowData: {fileID: 11400000, guid: e9ea626b04b756f4f9d8aeb6e2e3d0a6, type: 2}
   AttackSword: {fileID: 718424304211149055}
-  particleSword: {fileID: 1967835574231978638, guid: 3e196c9e632c76841a71cb6e2dc6d010, type: 3}
+  particlePolvo: {fileID: 11400000, guid: 8ea0056a5ae9fd94c9af73bff3f9aa94, type: 2}
   boxSize: {x: 1, y: 1}
 --- !u!114 &7498446087208840356
 MonoBehaviour:
@@ -465,7 +467,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47a014d5932cd0b42bd2672b8b981780, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: e9ea626b04b756f4f9d8aeb6e2e3d0a6, type: 2}
+  data:
+  - {fileID: 11400000, guid: e9ea626b04b756f4f9d8aeb6e2e3d0a6, type: 2}
+  - {fileID: 11400000, guid: 8ea0056a5ae9fd94c9af73bff3f9aa94, type: 2}
 --- !u!114 &5205718530273070197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -487,7 +491,7 @@ MonoBehaviour:
     M: 0.25
     X: 0
   lfSword:
-    B: 10
+    B: 5
     M: 2
     X: 0
   lfBow:
@@ -498,6 +502,24 @@ MonoBehaviour:
     B: 400
     M: 10
     X: 0
+  lfHealth:
+    B: 10
+    M: 1.5
+    X: 0
+--- !u!114 &2958990742201357644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1434717642495313481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a8ef793ab046ba48ae3a64f8009f518, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHealth: 10
+  CriticalHealthRatio: 0.3
 --- !u!1 &1621780251899903984
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,4 +1,4 @@
-using Unity.FPS.Game;
+using TIRIKA;
 using UnityEditor.Tilemaps;
 using UnityEngine;
 

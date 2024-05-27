@@ -1,4 +1,4 @@
-using Unity.FPS.Game;
+using TIRIKA;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,15 +7,16 @@ public class PlayerCombat : MonoBehaviour
     [Header("Arco")]    
     public float baseSpeed = 10f; // Velocidad base de la flecha    
     public GameObject spawnPointArrow;
-    private ObjectPoolBehaviour arrowPool;
+    public ObjectPoolData arrowData;    
 
     [Header("Espada")]    
     public Transform AttackSword;
-    public GameObject particlePolvo;
+    public ObjectPoolData particlePolvo;
     public Vector2 boxSize;    
     private bool IsArcher = true;
     private Animator animator;    
     private PlayerStats playerStats;
+    private ObjectPoolBehaviour PoolingController;
     private void Awake()
     {
     
@@ -40,26 +41,17 @@ public class PlayerCombat : MonoBehaviour
         if (animator == null)
             animator = GetComponentInChildren<Animator>();
 
-        arrowPool = GetComponent<ObjectPoolBehaviour>();
+        PoolingController = GetComponent<ObjectPoolBehaviour>();
         playerStats = GetComponent<PlayerStats>();
-    }    
-    public void Attack2(float force)
-    {
-        animator.SetBool("Shoot", false);
-        animator.SetTrigger("Attack2");
-    }
-    public void Attack1(float force)
-    {
-        animator.SetBool("Shoot", false);
-        animator.SetTrigger("Attack1");
-    }    
+    }        
     public void StartAttack(InputAction.CallbackContext callbackContext)
     {
+        animator.SetBool("Shoot", false);
         animator.SetBool("CanceledAttack", false);        
         if (IsArcher)
-            Attack1(1f);
+            animator.SetTrigger("Attack1");
         else
-            Attack2(1f);
+            animator.SetTrigger("Attack2");
     }
     public void Shoot(InputAction.CallbackContext callbackContext)
     {        
@@ -91,7 +83,11 @@ public class PlayerCombat : MonoBehaviour
             else
             {
                 //TODO partidulas de polvo
-                Instantiate(particlePolvo, AttackSword.position, AttackSword.rotation);
+                GameObject particle = PoolingController.GetPooledObject(particlePolvo.Index);
+                particle.transform.position = AttackSword.position;
+                particle.transform.rotation = AttackSword.rotation;
+                particle.SetActive(true);
+                //Instantiate(particlePolvo, AttackSword.position, AttackSword.rotation);
             }                
         }        
     }
@@ -100,7 +96,7 @@ public class PlayerCombat : MonoBehaviour
         float arrowSpeed = CalculateInitialSpeed();
         float damage = playerStats.fuerza.value;
         print("Damage bow " + damage);
-        GameObject arrow = arrowPool.GetPooledObject();        
+        GameObject arrow = PoolingController.GetPooledObject(arrowData.Index);
         arrow.GetComponent<ArrowProjectile>()
                 .SetInit(
                     arrowSpeed, 

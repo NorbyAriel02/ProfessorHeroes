@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[CreateAssetMenu(fileName = "New DB Attributes", menuName = "TIRIKA/DBAttributes")]
+[CreateAssetMenu(fileName = "New DB Attributes", menuName = "TIRIKA/DataBase/DBAttributes")]
 public class DBAttributes : DataBaseObject
 {
     [ContextMenu("Reset Item value")]

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
-[CreateAssetMenu(fileName = "New LevelData", menuName = "TIRIKA/LevelData")]
+[CreateAssetMenu(fileName = "New LevelData", menuName = "TIRIKA/P1/LevelData")]
 public class LevelSystemData : ScriptableObject
 {
     public float factor = 2f;
@@ -14,6 +14,7 @@ public class LevelSystemData : ScriptableObject
     public int maxLevel;//maximo nivel alcanzable
     public DataBaseObject attributes;
     public int AvialablePoints = 4;
+    public int PointsPerLevel = 4;
     [ContextMenu("Reset Item value")]
     public void ResetItemValue()
     {

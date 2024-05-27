@@ -13,6 +13,9 @@ public class SwitchWeapon : MonoBehaviour
     public bool isLayerBase = true;    
     private Animator animator;
     PlayerCombat playerCombat;
+    [SerializeField] private GoalObject goalBow;
+    [SerializeField] private GoalObject goalTorch;
+    [SerializeField] private GoalObject goalSword;
     private void Awake()
     {
         playerCombat = GetComponent<PlayerCombat>();
@@ -38,20 +41,32 @@ public class SwitchWeapon : MonoBehaviour
     }
     public void Weapon1(InputAction.CallbackContext callbackContext)
     {
+        if (!goalBow.isFinished)
+            return;
+
         SetLayer((int)AnimatorLayers.Arco);
         playerCombat.SetArcher();
     }
     public void Weapon2(InputAction.CallbackContext callbackContext)
     {
+        if (!goalTorch.isFinished)
+            return;
+
         SetLayer((int)AnimatorLayers.Antorcha);
     }
     public void Weapon3(InputAction.CallbackContext callbackContext)
     {
+        if (!goalSword.isFinished)
+            return;
+
         SetLayer((int)AnimatorLayers.Espada);
         playerCombat.SetMelee();
     }
     public void Weapon4(InputAction.CallbackContext callbackContext)
     {
+        if (!goalSword.isFinished)
+            return;
+
         SetLayer((int)AnimatorLayers.Escudo);
         playerCombat.SetMelee();
     }

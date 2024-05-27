@@ -4,44 +4,45 @@ using UnityEngine;
 
 public class ObjectPoolBehaviour : MonoBehaviour
 {
-
-    public ObjectPoolData data;
-
-    private List<GameObject> pooledObjects;
-
+    public ObjectPoolData[] data;
+    private List<List<GameObject>> pooledObjects;
     void Awake()
     {
         CreatePool();
     }
-
     public void CreatePool()
     {
-        pooledObjects = new List<GameObject>();
-
-        for(int i = 0; i < data.amountToPool; i++)
+        pooledObjects = new List<List<GameObject>>();
+        foreach (var goType in data)
         {
-            GameObject obj = (GameObject)Instantiate(data.objectToPool);
-            obj.SetActive(false);
-            pooledObjects.Add(obj);
+            List<GameObject> subList = new List<GameObject>();
+            for (int i = 0; i < goType.amountToPool; i++)
+            {
+                GameObject obj = (GameObject)Instantiate(goType.objectToPool);
+                obj.SetActive(false);
+                subList.Add(obj);
+            }
+            goType.Index = pooledObjects.Count;
+            pooledObjects.Add(subList);
         }
-        
     }
 
-    public GameObject GetPooledObject()
+    public GameObject GetPooledObject(int index)
     {
-        for(int i = 0; i < pooledObjects.Count; i++)
-        {
-            if(!pooledObjects[i].activeInHierarchy)
+        List<GameObject> subList = pooledObjects[index];
+        for (int i = 0; i < subList.Count; i++)
+        {            
+            if (!subList[i].activeInHierarchy)
             {
-                return pooledObjects[i];
+                return subList[i];
             }
         }
 
-        if(data.shouldExpand)
+        if (data[index].shouldExpand)
         {
-            GameObject obj = (GameObject)Instantiate(data.objectToPool);
+            GameObject obj = (GameObject)Instantiate(data[index].objectToPool);
             obj.SetActive(false);
-            pooledObjects.Add(obj);
+            subList.Add(obj);
             return obj;
         }
        

@@ -37,7 +37,8 @@ public class LevelSystem : MonoBehaviour
         
         if(level != levelData.currentlevel)
         {
-            levelData.currentlevel = level;
+            levelData.AvialablePoints += (level - levelData.currentlevel) * levelData.PointsPerLevel;
+            levelData.currentlevel = level;            
             levelData.requiredExpToNextLevel = GetRequiredExp(level);
             WhenLevelingUp?.Invoke(levelData);
             levelData.currentExp = 0;

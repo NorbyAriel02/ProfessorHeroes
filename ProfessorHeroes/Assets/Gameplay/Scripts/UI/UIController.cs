@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -12,9 +13,10 @@ public class UIController : MonoBehaviour
     public TMP_Text txtLevel;
     public Image imgExp;
     public Image imgSprint;
-    
-    public KeyCode PauseKey;
-    
+    public Image imgHealth;
+    public List<GameObject> buttons;
+    public DBGoalObject dbGoalObject;
+    public KeyCode PauseKey;    
     private void Awake()
     {
         
@@ -23,15 +25,28 @@ public class UIController : MonoBehaviour
     {        
         LevelSystem.ByAddingExperience += SetExpAndLevel;
         LevelSystem.StartLevelSystem += SetExpAndLevel;
+        PickupGoal.OnGetGoal += EnableWaepon;
     }
     private void OnDisable()
     {
         LevelSystem.ByAddingExperience -= SetExpAndLevel;
         LevelSystem.StartLevelSystem -= SetExpAndLevel;
+        PickupGoal.OnGetGoal -= EnableWaepon;
+    }
+    void EnableWaepon(GoalObject goal)
+    {
+        buttons[goal.Index].SetActive(true);        
     }
     private void Start()
     {
-        
+        foreach (var obj in dbGoalObject.objs)
+        {
+            GoalObject goal = (GoalObject)obj;
+            if (goal.isFinished)
+            {
+                EnableWaepon(goal);
+            }
+        }            
     }    
     public void ShowPause()
     {
