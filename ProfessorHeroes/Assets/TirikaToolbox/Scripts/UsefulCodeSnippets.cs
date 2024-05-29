@@ -5,6 +5,16 @@ using UnityEngine;
 
 public class UsefulCodeSnippets : MonoBehaviour
 {
+    /// <summary>
+    /// Opciones del menu contextual para asignar cosas en edit mode
+    /// </summary>
+    [ContextMenuItem("Randomize Name", "Randomize")]
+    public string TestField;
+    private void Randomize()
+    {
+        TestField = "Some Random Name " + Random.Range(0, 28);
+    }
+
     void Metodo()
     {
         StartCoroutine(Corrutina());
