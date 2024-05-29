@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ProgressSystem : MonoBehaviour
 {
-    public List<GoalObject> goalObjects;
+    public DBGoalObject goals;
     private void OnEnable()
     {
         PickupGoal.OnGetGoal += OnGetGoal;
@@ -15,13 +15,15 @@ public class ProgressSystem : MonoBehaviour
     }
     private void Start()
     {
-        if (!goalObjects[0].isAvailable)
+        GoalObject firstGoal = (GoalObject)goals.objs[0];
+        if (!firstGoal.isAvailable)
         {
-            goalObjects[0].isAvailable = true;            
+            firstGoal.isAvailable = true;            
         }
         
-        foreach (var goalObject in goalObjects)
+        foreach (var genericObject in goals.objs)
         {
+            GoalObject goalObject = genericObject as GoalObject;
             if(goalObject.isAvailable && !goalObject.isFinished)
                 SpawnedObject(goalObject);
         }
@@ -30,10 +32,11 @@ public class ProgressSystem : MonoBehaviour
     public void OnGetGoal(GoalObject goal)
     {
         CompleteGoal(goal);
-        if (goalObjects.Count > (goal.Index+1))
+        if (goals.objs.Count > (goal.Index + 1))
         {
-            goalObjects[goal.Index + 1].isAvailable = true;
-            SpawnedObject(goalObjects[goal.Index + 1]);
+            GoalObject nextGoal = goals.objs[goal.Index + 1] as GoalObject;
+            nextGoal.isAvailable = true;
+            SpawnedObject(nextGoal);
         }
     }
     public void CompleteGoal(GoalObject goal)
@@ -42,6 +45,7 @@ public class ProgressSystem : MonoBehaviour
     }
     public void SpawnedObject(GoalObject goal)
     {
+        Debug.Log("spawned " + goal.name);
         if (goal.PickupObject != null)
             Instantiate(goal.PickupObject.prefab, goal.PickupObject.spawnPosition, goal.PickupObject.spawnRotation);
     }

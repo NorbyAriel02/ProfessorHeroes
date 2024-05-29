@@ -9,10 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: DBGoal
-  m_EditorClassIdentifier: Assembly-CSharp::DBGoalObject
+  m_Script: {fileID: 11500000, guid: 93562ae539b72a944a4eb93b2eb942d1, type: 3}
+  m_Name: DBGoals
+  m_EditorClassIdentifier: 
   objs:
   - {fileID: 11400000, guid: 627541f2691dee4468c3ff95418f67e6, type: 2}
   - {fileID: 11400000, guid: 3fb343494253ef844b47e9ab53097485, type: 2}
   - {fileID: 11400000, guid: fbee8a34739870c4996dd243cc81a758, type: 2}
+  - {fileID: 11400000, guid: fe6a73e1b5fc3b349aa030aae5ff2252, type: 2}
+  - {fileID: 11400000, guid: cb5754a39eed8234698508ccf7718ec6, type: 2}

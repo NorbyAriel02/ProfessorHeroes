@@ -13,8 +13,8 @@ public class UIController : MonoBehaviour
     public TMP_Text txtLevel;
     public Image imgExp;
     public Image imgSprint;
-    public Image imgHealth;
-    public List<GameObject> buttons;
+    public Image imgHealth;    
+    public List<ButtonGoals> buttons;
     public DBGoalObject dbGoalObject;
     public KeyCode PauseKey;    
     private void Awake()
@@ -34,8 +34,14 @@ public class UIController : MonoBehaviour
         PickupGoal.OnGetGoal -= EnableWaepon;
     }
     void EnableWaepon(GoalObject goal)
-    {
-        buttons[goal.Index].SetActive(true);        
+    {        
+        foreach(ButtonGoals bg in buttons)
+        {
+            if(bg.goal == goal)
+            {
+                bg.button.SetActive(true);
+            }
+        }
     }
     private void Start()
     {
@@ -82,4 +88,12 @@ public class UIController : MonoBehaviour
     {        
         imgSprint.fillAmount = PlayerStats.Instance.GetSpritDurationNormalize();
     }    
+}
+[System.Serializable]
+public class ButtonGoals
+{
+    public string name;
+    public GoalObject goal;
+    public GameObject button;
+    
 }

@@ -417,6 +417,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isLayerBase: 1
+  goalBow: {fileID: 11400000, guid: 627541f2691dee4468c3ff95418f67e6, type: 2}
+  goalTorch: {fileID: 11400000, guid: 3fb343494253ef844b47e9ab53097485, type: 2}
+  goalSword: {fileID: 11400000, guid: fbee8a34739870c4996dd243cc81a758, type: 2}
 --- !u!114 &4205940679661218488
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -9,7 +9,12 @@ public class GoalObject : GenericObject
     public bool inProgress;
     public bool isFinished;    
     public SpawnableObjeto PickupObject;
+    [ContextMenu("Reset value")]
+    public void ResetValues()
+    {
+        isAvailable = false;
+        inProgress = false;
+        isFinished = false;
+    }
 }
 
-[CreateAssetMenu(fileName = "New DB Goal Object", menuName = "TIRIKA/P1/DBGoalObject")]
-public class DBGoalObject : DataBaseObject {}

@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b4518480d338984698fb151cf3fc8cb, type: 3}
+  m_Name: NewGoal
+  m_EditorClassIdentifier: 
+  name: New Goal
+  description: 
+  index: 4
+  isAvailable: 0
+  inProgress: 0
+  isFinished: 0
+  PickupObject: {fileID: 11400000, guid: e2f0015e83c659c449b671a5fad1f03a, type: 2}
