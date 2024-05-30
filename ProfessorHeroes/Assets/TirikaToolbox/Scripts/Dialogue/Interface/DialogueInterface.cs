@@ -6,17 +6,32 @@ using UnityEngine.UI;
 
 public class DialogueInterface : MonoBehaviour
 {
+    public static DialogueInterface Instance { get; private set; }
     public delegate void DialogueCallback(DialogueObject dialogue);
     public static DialogueCallback OnDialogueCallback;
     
     public DialogueDataBaseObject dialogues;
     public float typeSpeed = 0.05f;
 
-    protected Queue<string> sentences;
-    
+    protected Queue<Sentence> sentences;
+    void OnEnable()
+    {
+        if (DialogueInterface.Instance == null)
+        {
+            DialogueInterface.Instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else
+            Destroy(gameObject);
+
+    }
+    public virtual void ShowDialogue(int index)
+    {
+
+    }
     public virtual void StartVar()
     {
-        sentences = new Queue<string>();
+        sentences = new Queue<Sentence>();
     }
     public virtual void OnEventDialogue()
     {
@@ -28,13 +43,14 @@ public class DialogueInterface : MonoBehaviour
         dialogue.ItWasRead = true;
         sentences.Clear();
 
-        foreach (string sentence in dialogue.sentences)
+        foreach (Sentence sentence in dialogue.sentences)
         {
             sentences.Enqueue(sentence);
         }
 
         DisplayNextSentence();
         OnDialogueCallback?.Invoke(dialogue);
+        InputManager.Instance.controles.Disable();
     }
     public virtual void DisplayNextSentence()
     {
@@ -43,6 +59,6 @@ public class DialogueInterface : MonoBehaviour
 
     public virtual void EndDialogue()
     {
-
+        InputManager.Instance.controles.Enable();
     }    
 }

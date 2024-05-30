@@ -10,19 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e90383f988c373747a22287afbbfd7a2, type: 3}
-  m_Name: Test1 4
+  m_Name: Test4
   m_EditorClassIdentifier: 
   name: Prueba de dialogo
   description: 
-  index: 0
+  index: 2
   id: 0
   nameDialogue: 
-  nameNPC: 
-  faceNPC: {fileID: 173268866, guid: 49ea13265ff1dfa46ad7bb642d3a8bd4, type: 3}
-  position: 1
+  people:
+  - id: 0
+    name: Rogue
+    Face: {fileID: 21300000, guid: b08b19887d6f95b459680f61afefd5c3, type: 3}
+    position: 2
   sentences:
-  - Hola
-  - Soy un dialogo de prueba en primera persona
-  - Es como un comentario o un pensamiento del personaje
-  - Se suele dar para ayudar al jugador a comprender algun concepto necesario
+  - id: 0
+    text: Hola hola
+  - id: 0
+    text: Manola
+  - id: 0
+    text: Lalalala
+  - id: 0
+    text: que va!!!
   ItWasRead: 0

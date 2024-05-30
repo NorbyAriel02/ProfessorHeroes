@@ -226,6 +226,7 @@ GameObject:
   - component: {fileID: 6529671334027464920}
   - component: {fileID: 6304127053977965925}
   - component: {fileID: 1235970014514280210}
+  - component: {fileID: 3062634959232965531}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -297,7 +298,19 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
-  sprintHoldTime: 1
+--- !u!114 &3062634959232965531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5607653740992721141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a363efa186ff7c749afe61a8be8cd4c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  goals: {fileID: 11400000, guid: a6c3f66e6cd43804e970d9bfc1fe7960, type: 2}
 --- !u!1 &8827457205124631370
 GameObject:
   m_ObjectHideFlags: 0

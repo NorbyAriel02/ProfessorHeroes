@@ -5,7 +5,7 @@ using UnityEngine;
 public class DialogueElementList : MonoBehaviour
 {
     public DialogueObject dialogue;
-    public NPCDialogueInterface dialogueInterface;
+    public DialogueInterface dialogueInterface;
     private GameObject father;
     private void Start()
     {

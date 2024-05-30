@@ -26,7 +26,12 @@ public class AudioManager : MonoBehaviour
             Destroy(gameObject);
 
     }
-        
+
+    public void PlayOnShot(AudioClip clip, float pich)
+    {
+        audioSourceFX.pitch = pich;
+        audioSourceFX.PlayOneShot(clip);
+    }
     public void PlayOnShot(AudioClip clip)
     {
         audioSourceFX.PlayOneShot(clip);

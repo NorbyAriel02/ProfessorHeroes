@@ -14,15 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Prueba de dialogo
   description: 
-  index: 0
+  index: 4
   id: 0
   nameDialogue: 
-  nameNPC: 
-  faceNPC: {fileID: 173268866, guid: 49ea13265ff1dfa46ad7bb642d3a8bd4, type: 3}
-  position: 1
+  people:
+  - id: 0
+    name: Juan
+    Face: {fileID: -49598338, guid: bf96accfc7a9dde4a8712ee609423206, type: 3}
+    position: 1
   sentences:
-  - Hola
-  - Soy un dialogo de prueba en primera persona
-  - Es como un comentario o un pensamiento del personaje
-  - Se suele dar para ayudar al jugador a comprender algun concepto necesario
+  - id: 0
+    text: Hola...
+  - id: 0
+    text: Chauu.....
   ItWasRead: 0
