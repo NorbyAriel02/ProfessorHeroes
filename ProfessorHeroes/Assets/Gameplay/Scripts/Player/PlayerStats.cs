@@ -113,7 +113,7 @@ public class PlayerStats : MonoBehaviour
         if (isRunning)
             timer -= Time.fixedDeltaTime;
         else
-            timer += Time.fixedDeltaTime / 10;
+            timer += Time.fixedDeltaTime / 4;
 
         sprintDuration = Mathf.Clamp(timer, 0, SprintDuration);
     }

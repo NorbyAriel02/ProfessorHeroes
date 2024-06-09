@@ -1,13 +1,17 @@
 //using System.Diagnostics;
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 
 //Wave Function Collapse
 public class PlayerMove : MonoBehaviour
 {        
     public float moveSmooth = 0.1f;    
-    
+    public float aceleration = 0.5f;
+    public float InitialVelx = 3;
+    public float maxSpeedX = 4;    
     private float moveHorizontal = 0;
     private Rigidbody2D rb;
     private Vector3 speed = Vector3.zero;
@@ -34,8 +38,8 @@ public class PlayerMove : MonoBehaviour
     [Header("Animation")]
     private Animator animator;
     public Vector2 direccion;
-        
-    private float currectSpeed = 0f;    
+
+    private float maxVel;
     private float timer;
     private void Awake()
     {
@@ -61,47 +65,62 @@ public class PlayerMove : MonoBehaviour
         animator = GetComponent<Animator>();    
         if(animator == null)
             animator = GetComponentInChildren<Animator>();
-                
-        currectSpeed = CalculeSpeed();
     }
 
     private void Update()
     {
         direccion = InputManager.Instance.controles.Base.Move.ReadValue<Vector2>();
-        moveHorizontal = direccion.x * currectSpeed;
-        animator.SetFloat("SpeedX", Mathf.Abs((int)rb.velocity.x));        
-        animator.SetFloat("SpeedY", rb.velocity.y);        
+        //moveHorizontal = direccion.x * currectSpeed;
+        
+        
     }
-
+    void CaluleAnimationSpeed()
+    {
+        float porcentajeVel = (rb.velocity.x * 100) / maxVel;
+        float xx = (porcentajeVel * maxSpeedX) / 100;
+        #region coment
+        //Comvierto el valor a entero
+        //para evitar las pequeñas variaciones
+        //que pueden activar la animacion
+        //tambien mantendo el valor en un
+        //numero maximo para que al multiplicarlo
+        //por la vel de la animacion esta no sea muy alta
+        #endregion
+        float x = Mathf.Clamp(Mathf.Abs(Convert.ToInt32(xx)), 0, maxSpeedX);
+        animator.SetFloat("SpeedX", x);
+        animator.SetFloat("SpeedY", rb.velocity.y);
+    }
     private void FixedUpdate()
     {
         isGround = Physics2D.OverlapBox(boxController.position, boxSize, 0, WhatIsGroundMask);
         if (!animator.GetBool("InCombat"))//si no esta en combate
         {            
             animator.SetBool("InGround", isGround);
-            Move(moveHorizontal * Time.fixedDeltaTime);            
+            Move(direccion.x);
         }
         else
             Move(0);
-    }    
-    private void Move(float move)
-    {
-        Vector3 vel = new Vector2(move, rb.velocity.y);
+
+        CaluleAnimationSpeed();
+    }
+    float t = 0;
+    private void Move(float dir)
+    {        
+        Vector3 vel = new Vector2(CalculeSpeed(dir), rb.velocity.y);
+
         rb.velocity = Vector3.SmoothDamp(rb.velocity, vel, ref speed, moveSmooth);
-        
-        if (move > 0 && !seeRight)
+        if (dir > 0 && !seeRight)
         {
             Turn();
         }
-        else if (move < 0 && seeRight)
+        else if (dir < 0 && seeRight)
         {
             Turn();
         }                
     }
     public void Jump(InputAction.CallbackContext callbackContext)
     {
-        float jumpForze = MathHelper.GetY(PlayerStats.Instance.Jump); 
-        print("Force jump " + jumpForze);
+        float jumpForze = MathHelper.GetY(PlayerStats.Instance.Jump);         
         if (isGround && !animator.GetBool("InCombat") && !animator.GetBool("Pickup") && !animator.GetBool("Takeit"))
         {
             isGround = false;
@@ -132,15 +151,11 @@ public class PlayerMove : MonoBehaviour
         if (!animator.GetBool("InGround"))
             return;
 
-        animator.SetBool("Sprint", true);
-        currectSpeed = CalculeSpeed();
-        print("sprint desde move " +  currectSpeed);
+        animator.SetBool("Sprint", true);        
     }
     public void EndSprint()
     {
-        animator.SetBool("Sprint", false);
-        currectSpeed = CalculeSpeed();
-        print("Cancelo desde move " + currectSpeed);
+        animator.SetBool("Sprint", false);        
     }
     public void ParticleJumpStart()
     {
@@ -177,13 +192,26 @@ public class PlayerMove : MonoBehaviour
         particleRun.Play();
         AudioManager.Instance.PlayOnShot(sfxHardFall);
     }
-    private float CalculeSpeed()
-    {
+    private float CalculeSpeed(float dir)
+    {        
         if (animator.GetBool("Sprint"))
-            currectSpeed = PlayerStats.Instance.Sprint.B + MathHelper.GetY(PlayerStats.Instance.Sprint);
+            maxVel = PlayerStats.Instance.Sprint.B + MathHelper.GetY(PlayerStats.Instance.Sprint);
         else
-            currectSpeed = PlayerStats.Instance.Sprint.B;
+            maxVel = PlayerStats.Instance.Sprint.B;
+        
+        float velx = 0;
+        if (dir != 0)
+        {
+            t += Time.fixedDeltaTime;
+            velx = Mathf.Clamp((InitialVelx) + 0.5f * (aceleration) * (t * t), 0, maxVel);
+            velx = velx * dir;
+        }
+        else
+        {
+            velx = 0;
+            t = 0;
+        }
 
-        return currectSpeed;
+        return velx;
     }
 }

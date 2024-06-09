@@ -10,6 +10,10 @@ public class ObjectPoolBehaviour : MonoBehaviour
     {
         CreatePool();
     }
+    private void Start()
+    {
+        
+    }
     public void CreatePool()
     {
         pooledObjects = new List<List<GameObject>>();
